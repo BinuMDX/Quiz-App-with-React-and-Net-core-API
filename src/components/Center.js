@@ -7,7 +7,7 @@ export default function Center(props) {
     <Grid container
     direction="column"
     justifyContent="center"
-    alignItems="center" style={{minHeight: "100vh", minWidth: "100vh"}}>
+    alignItems="center" style={{minHeight: "70vh", minWidth: "100vh"}}>
       <Grid item xs={1} align="center">
         {props.children}
       </Grid>
