@@ -19,7 +19,16 @@ export default function Login() {
 
     const login = e => {
         e.preventDefault();
-        console.log(values);
+        if (validate())
+            console.log(values);
+    }
+
+    const validate = () => {
+        let temp = {};
+        temp.name = values.name ? "" : "This field is required.";
+        temp.email = (/$^|.+@.+..+/).test(values.email) && values.email? "" : "Email is not valid.";
+        setErrors(temp)
+        return Object.values(temp).every(x => x === "");
     }
 
     return (
@@ -34,8 +43,8 @@ export default function Login() {
                         }
                     }}>
                         <form onSubmit={login}>
-                            <TextField label='Email' name='email' value={values.email} onChange={handleInputChange} variant='outlined' size='small' />
-                            <TextField label='Name' name='name' value={values.name} onChange={handleInputChange} variant='outlined' size='small' />
+                            <TextField label='Email' name='email' value={values.email} onChange={handleInputChange} variant='outlined' size='small' {...(errors.email && { error: true, helperText: errors.email })} />
+                            <TextField label='Name' name='name' value={values.name} onChange={handleInputChange} variant='outlined' size='small' {...(errors.name && { error: true, helperText: errors.name })} />
                             <Button type='submit' variant='contained' size='Large' sx={{ m: 1, width: '50%' }}>Start</Button>
                         </form>
                     </Box>
